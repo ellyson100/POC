@@ -1,8 +1,5 @@
 ﻿using POC.API.Interfaces.Repository;
 using POC.API.Model;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace POC.API.Repository
 {
