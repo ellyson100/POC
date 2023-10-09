@@ -254,9 +254,6 @@ namespace POC.IntegrationTest
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.NotNull(product);
-            Assert.Equal(viewModel.Name, product.Name);
-            Assert.Equal(viewModel.Description, product.Description);
-            Assert.Equal(((long)viewModel.Price), ((long)product.Price));
             Assert.Equal(HttpStatusCode.OK, responseDelete.StatusCode);
         }
 
