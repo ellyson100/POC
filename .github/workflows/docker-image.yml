@@ -1,17 +1,23 @@
-name: Docker Image CI
+name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  build_and_push:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: |
-        cd POC.API
-        docker build -t poc-api:${GITHUB_RUN_NUMBER} .
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Login
+      run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
+
+    - name: Build
+      run: cd POC.API && docker build -t ellyson100/poc-api:$GITHUB_RUN_NUMBER .
+
+    - name: Push
+      run: docker push ellyson100/poc-api:$GITHUB_RUN_NUMBER
