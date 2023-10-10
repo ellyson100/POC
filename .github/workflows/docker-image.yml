@@ -15,15 +15,12 @@ jobs:
         
     - name: Checkout code
       uses: actions/checkout@v2
-      
-    - name: Login
-      run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
 
-    - name: Build
-      run: docker build -t $DOCKER_IMAGE:$GITHUB_RUN_NUMBER -f POC.API/Dockerfile POC.API
-
-    - name: Push
-      run: docker push $DOCKER_IMAGE:$GITHUB_RUN_NUMBER
+    - name: Build/Push Imagem Docker
+      run: |
+        echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
+        docker build -t $DOCKER_IMAGE:$GITHUB_RUN_NUMBER -f POC.API/Dockerfile POC.API
+        docker push $DOCKER_IMAGE:$GITHUB_RUN_NUMBER
       
     - name: Instala Kustomize
       run: sudo snap install kustomize
