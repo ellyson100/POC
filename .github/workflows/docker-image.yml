@@ -28,21 +28,12 @@ jobs:
     - name: Instala Kustomize
       run: sudo snap install kustomize
 
-    - name: Adiciona Repositório Kustomize
-      run: git clone https://github.com/ellyson100/POC_kustomize.git && cd POC_kustomize
-
-    - name: Altera Imagem
+    - name: Atualiza Imagem Kustomize
       run: |
-        ls 
-        cd overlays
-        kustomize edit set image $DOCKER_IMAGE=$DOCKER_IMAGE:$GITHUB_RUN_NUMBER
-        cd ..
-        ls
-
-    - name: Commita Alterações
-      run: |
-        git add .
-        git commit -m "Atualiza arquivos via Kustomize"
+        git clone https://github.com/ellyson100/POC_kustomize.git && cd POC_kustomize
+        cd overlays && kustomize edit set image $DOCKER_IMAGE=$DOCKER_IMAGE:$GITHUB_RUN_NUMBER
+        git add overlays && git commit -m "Atualiza kustomize - Build $GITHUB_RUN_NUMBER"
         git push https://${{ secrets.TOKEN }}@github.com/ellyson100/POC_kustomize.git
+
 
     
