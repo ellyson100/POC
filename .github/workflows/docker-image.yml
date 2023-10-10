@@ -10,23 +10,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Gera tag docker
+      run: echo "DOCKER_IMAGE=ellyson100/poc-api" >> $GITHUB_ENV
+        
     #- name: Checkout code
-    #  uses: actions/checkout@v2
+     # uses: actions/checkout@v2
       
     #- name: Login
-    #  run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
+     # run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
 
     #- name: Build
-    #  run: cd POC.API && docker build -t ellyson100/poc-api:$GITHUB_RUN_NUMBER .
+     # run: docker build -t $DOCKER_IMAGE:$GITHUB_RUN_NUMBER -f POC.API/Dockerfile POC.API
 
     #- name: Push
-    #  run: docker push ellyson100/poc-api:$GITHUB_RUN_NUMBER
+     # run: docker push $DOCKER_IMAGE:$GITHUB_RUN_NUMBER
       
     - name: Instala Kustomize
       run: sudo snap install kustomize
 
-    - name: Executa Kustomize
-      run: kustomize version
-
     - name: Adiciona Repositório Kustomize
-      run: git clone https://github.com/ellyson100/POC_kustomize.git
+      run: git clone https://github.com/ellyson100/POC_kustomize.git && cd POC_kustomize
+
+    - name: Altera Imagem
+      run: cd overlays && kustomize edit set image $DOCKER_IMAGE=$DOCKER_IMAGE:$GITHUB_RUN_NUMBER && cd ..
+
+    - name: Commita Alterações
+      run: |
+        git add .
+        git commit -m "Atualiza arquivos via Kustomize"
+        git push https://${{ secrets.TOKEN }}@github.com/ellyson100/POC_kustomize.git
+
+    
