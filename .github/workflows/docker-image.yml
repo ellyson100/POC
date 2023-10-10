@@ -21,3 +21,12 @@ jobs:
 
     - name: Push
       run: docker push ellyson100/poc-api:$GITHUB_RUN_NUMBER
+      
+    - name: Instala Kustomize
+      run: apt update && snap install kustomize
+
+    - name: Executa Kustomize
+      run: kustomize version
+
+    - name: Adiciona Repositório Kustomize
+      run: git clone https://github.com/ellyson100/POC_kustomize.git
