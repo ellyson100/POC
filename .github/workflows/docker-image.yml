@@ -10,20 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    #- name: Checkout code
+    #  uses: actions/checkout@v2
       
-    - name: Login
-      run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
+    #- name: Login
+    #  run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
 
-    - name: Build
-      run: cd POC.API && docker build -t ellyson100/poc-api:$GITHUB_RUN_NUMBER .
+    #- name: Build
+    #  run: cd POC.API && docker build -t ellyson100/poc-api:$GITHUB_RUN_NUMBER .
 
-    - name: Push
-      run: docker push ellyson100/poc-api:$GITHUB_RUN_NUMBER
+    #- name: Push
+    #  run: docker push ellyson100/poc-api:$GITHUB_RUN_NUMBER
       
     - name: Instala Kustomize
-      run: sudo apt update && sudo apt install -y snapd && snap install kustomize
+      run: sudo snap install kustomize -y
 
     - name: Executa Kustomize
       run: kustomize version
