@@ -13,17 +13,17 @@ jobs:
     - name: Gera tag docker
       run: echo "DOCKER_IMAGE=ellyson100/poc-api" >> $GITHUB_ENV
         
-    #- name: Checkout code
-     # uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
       
-    #- name: Login
-     # run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
+    - name: Login
+      run: echo "${{ secrets.SENHA_HUB }}" | docker login -u ellyson100 --password-stdin
 
-    #- name: Build
-     # run: docker build -t $DOCKER_IMAGE:$GITHUB_RUN_NUMBER -f POC.API/Dockerfile POC.API
+    - name: Build
+      run: docker build -t $DOCKER_IMAGE:$GITHUB_RUN_NUMBER -f POC.API/Dockerfile POC.API
 
-    #- name: Push
-     # run: docker push $DOCKER_IMAGE:$GITHUB_RUN_NUMBER
+    - name: Push
+      run: docker push $DOCKER_IMAGE:$GITHUB_RUN_NUMBER
       
     - name: Instala Kustomize
       run: sudo snap install kustomize
