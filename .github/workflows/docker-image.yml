@@ -32,5 +32,7 @@ jobs:
       run: |
         git clone https://github.com/ellyson100/POC_kustomize.git && cd POC_kustomize
         cd overlays && kustomize edit set image $DOCKER_IMAGE=$DOCKER_IMAGE:$GITHUB_RUN_NUMBER && cd ..
+        git config user.email "ellyson100@gmail.com"
+        git config user.name "ellyson100"
         git add . && git commit -m "Atualiza kustomize - Build $GITHUB_RUN_NUMBER"
         git push https://${{ secrets.TOKEN }}@github.com/ellyson100/POC_kustomize.git
