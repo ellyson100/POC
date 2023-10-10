@@ -31,8 +31,10 @@ jobs:
     - name: Atualiza Imagem Kustomize
       run: |
         git clone https://github.com/ellyson100/POC_kustomize.git && cd POC_kustomize
-        cd overlays && kustomize edit set image $DOCKER_IMAGE=$DOCKER_IMAGE:$GITHUB_RUN_NUMBER
-        git add overlays && git commit -m "Atualiza kustomize - Build $GITHUB_RUN_NUMBER"
+        ls
+        cd overlays && kustomize edit set image $DOCKER_IMAGE=$DOCKER_IMAGE:$GITHUB_RUN_NUMBER && cd ..
+        cat kustomization.yaml
+        git add . && git commit -m "Atualiza kustomize - Build $GITHUB_RUN_NUMBER"
         git push https://${{ secrets.TOKEN }}@github.com/ellyson100/POC_kustomize.git
 
 
