@@ -23,7 +23,7 @@ jobs:
     #  run: docker push ellyson100/poc-api:$GITHUB_RUN_NUMBER
       
     - name: Instala Kustomize
-      run: sudo snap install kustomize -y
+      run: sudo snap install kustomize
 
     - name: Executa Kustomize
       run: kustomize version
