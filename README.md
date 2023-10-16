@@ -11,4 +11,4 @@
 >
 >Para acessar a apliação utilizei a url:
 >
->http://localhost/swagger/index.html
+>http://localhost/swagger/index.html.
