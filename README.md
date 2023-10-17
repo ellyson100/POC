@@ -1,7 +1,7 @@
 # POC
 
 # Como rodar
->Executar o comando no terminal dentro da pasta POC/POC.API para criar a imagem...
+>Executar o comando no terminal dentro da pasta POC/POC.API para criar a imagem.
 >
 >docker build . -t poc
 >
